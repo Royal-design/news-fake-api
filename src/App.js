@@ -1,23 +1,30 @@
-import logo from './logo.svg';
-import './App.css';
+import { useEffect, useState } from "react";
+import { Form } from "./Form";
+import "./app.style.scss";
+import { Table } from "./Table";
 
 function App() {
+  const API_URL = "https://jsonplaceholder.typicode.com/";
+  const [reqref, setreqref] = useState("users");
+  const [items, setitems] = useState([]);
+  useEffect(() => {
+    const fetcher = async () => {
+      try {
+        const response = await fetch(`${API_URL}${reqref}`);
+        const listItems = await response.json();
+        if (!response.ok) throw Error("page not found");
+        setitems(listItems);
+      } catch (error) {
+        console.error(error);
+      }
+    };
+    (async () => fetcher())();
+  }, [reqref]);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="">
+      <Form reqref={reqref} setreqref={setreqref} />
+      <Table items={items} />
     </div>
   );
 }

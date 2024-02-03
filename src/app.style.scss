@@ -1,0 +1,42 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+body {
+  width: 100%;
+}
+form {
+  top: 0;
+  position: fixed;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  button {
+    background-color: grey;
+    padding: 1rem 2rem;
+    border: none;
+    flex-grow: 1;
+    transition: all 0.4s;
+    &:focus {
+      outline: none;
+    }
+  }
+  .selected {
+    background-color: green;
+  }
+}
+.table-container {
+  margin-top: 4rem;
+}
+table td {
+  padding: 1rem;
+  border: 1px solid;
+}
+table tr {
+  background-color: grey;
+  color: white;
+}
+table th {
+  background-color: green;
+}
